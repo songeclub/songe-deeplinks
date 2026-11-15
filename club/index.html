@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#5A7DFF" />
+  <title>Invitation à un club Songe</title>
+  <meta name="description" content="Une invitation à rejoindre un club de lecture sur Songe." />
+
+  <!-- Open Graph statiques : la page ne lit rien du club, le code du lien vaut invitation -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Rejoins mon club de lecture sur Songe" />
+  <meta property="og:description" content="Un même livre, une date, et des lecteurs pour en parler." />
+  <meta property="og:site_name" content="Songe" />
+  <meta property="og:image" content="https://songe.techno.studio/og-image.jpg" />
+  <meta property="og:image:secure_url" content="https://songe.techno.studio/og-image.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1024" />
+  <meta property="og:image:height" content="1024" />
+  <meta property="og:image:alt" content="Songe — l'app pour les amoureux de lecture" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Rejoins mon club de lecture sur Songe" />
+  <meta name="twitter:description" content="Un même livre, une date, et des lecteurs pour en parler." />
+  <meta name="twitter:image" content="https://songe.techno.studio/og-image.jpg" />
+
+  <!-- Apple Smart App Banner -->
+  <meta name="apple-itunes-app" content="app-id=6741076205" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --accent: #5A7DFF;
+      --accent-soft: rgba(90, 125, 255, 0.08);
+      --accent-strong: #4666E8;
+      --primary-text: #14181B;
+      --secondary-text: #57636C;
+      --bg: #F1F4F8;
+      --card: #FFFFFF;
+      --shadow: 0 12px 40px rgba(20, 24, 27, 0.08);
+      --skeleton: #E5E9F0;
+    }
+
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--primary-text);
+      background: var(--bg);
+      min-height: 100vh;
+      letter-spacing: -0.2px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background:
+        radial-gradient(ellipse at top, rgba(90, 125, 255, 0.18) 0%, transparent 55%),
+        linear-gradient(180deg, #EAF0FF 0%, #F1F4F8 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 20px 32px;
+      min-height: 100vh;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 32px;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--secondary-text);
+    }
+    .brand-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(90, 125, 255, 0.3);
+      font-size: 14px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 24px;
+      padding: 32px 28px 28px;
+      box-shadow: var(--shadow);
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .cta-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 24px;
+      border-radius: 14px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      width: 100%;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      box-shadow: 0 8px 24px rgba(90, 125, 255, 0.35);
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .cta-primary:hover { transform: translateY(-1px); background: var(--accent-strong); }
+    .cta-primary:active { transform: translateY(0); }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 24px 0 20px;
+      color: var(--secondary-text);
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(20, 24, 27, 0.08);
+    }
+
+    .stores {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      background: var(--primary-text);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      transition: transform 0.15s ease;
+    }
+    .store-btn:hover { transform: translateY(-1px); }
+    .store-btn svg { flex-shrink: 0; }
+
+    .pack-cover {
+      width: 180px;
+      height: 180px;
+      border-radius: 18px;
+      overflow: hidden;
+      margin: 0 auto 20px;
+      background: var(--accent-soft);
+      box-shadow: 0 10px 28px rgba(20, 24, 27, 0.14);
+      display: grid;
+      place-items: center;
+      font-size: 56px;
+    }
+    .pack-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .pack-cover.mosaic {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      place-items: stretch;
+    }
+    .pack-cover.mosaic img { min-width: 0; min-height: 0; }
+
+    .title {
+      font-size: 22px;
+      font-weight: 700;
+      margin: 0 0 6px;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+    }
+    .owner {
+      font-size: 14px;
+      color: var(--accent);
+      margin: 0 0 12px;
+      font-weight: 500;
+      overflow-wrap: anywhere;
+    }
+    .description {
+      font-size: 14px;
+      color: var(--secondary-text);
+      line-height: 1.5;
+      margin: 0 0 12px;
+      overflow-wrap: anywhere;
+      white-space: pre-line;
+    }
+    .count {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--secondary-text);
+      margin: 0 0 20px;
+    }
+
+    .books {
+      list-style: none;
+      margin: 24px 0 0;
+      padding: 0;
+      text-align: left;
+    }
+    .book {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 0;
+      border-top: 1px solid rgba(20, 24, 27, 0.06);
+    }
+    .book-cover {
+      width: 44px;
+      height: 66px;
+      flex-shrink: 0;
+      border-radius: 6px;
+      object-fit: cover;
+      background: var(--skeleton);
+      display: block;
+    }
+    .book-text { min-width: 0; }
+    .book-title {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.25;
+      margin: 0;
+      overflow-wrap: anywhere;
+    }
+    .book-author {
+      font-size: 13px;
+      color: var(--secondary-text);
+      margin: 3px 0 0;
+      overflow-wrap: anywhere;
+    }
+
+    .skel-cover { width: 180px; height: 180px; border-radius: 18px; margin: 0 auto 20px; }
+    .skel-title { width: 200px; height: 22px; margin: 0 auto 10px; }
+    .skel-owner { width: 110px; height: 14px; margin: 0 auto 16px; }
+    .skel-text { width: 240px; height: 14px; margin: 0 auto 24px; }
+
+    /* Loading skeleton */
+    .skeleton {
+      background: linear-gradient(90deg, var(--skeleton) 0%, #EEF2F7 50%, var(--skeleton) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite linear;
+      border-radius: 8px;
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    /* Not found state */
+    .not-found {
+      padding: 32px 16px;
+    }
+    .not-found h2 {
+      font-size: 18px;
+      margin: 16px 0 8px;
+      font-weight: 700;
+    }
+    .not-found p {
+      font-size: 14px;
+      color: var(--secondary-text);
+      margin: 0 0 24px;
+    }
+    .not-found-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+    }
+
+    .hint {
+      font-size: 13px;
+      color: var(--secondary-text);
+      line-height: 1.5;
+      margin: 16px 0 0;
+    }
+
+    footer {
+      margin-top: 32px;
+      font-size: 12px;
+      color: var(--secondary-text);
+      text-align: center;
+    }
+    footer a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  </style>
+</head>
+<body>
+  <div class="brand">
+    <span class="brand-logo">☁️</span>
+    <span>Songe</span>
+  </div>
+
+  <main class="card" id="card">
+    <div class="pack-cover">📚</div>
+    <h1 class="title">Une invitation dans un club de lecture</h1>
+    <p class="description">Un même livre, une date, et des lecteurs pour en parler. Ouvre l'invitation dans Songe pour découvrir le club et le rejoindre.</p>
+
+    <a class="cta-primary" id="open-app" href="/">
+      Ouvrir l'invitation dans Songe
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"/>
+        <polyline points="12 5 19 12 12 19"/>
+      </svg>
+    </a>
+
+    <div class="divider">Pas encore l'app ?</div>
+
+    <div class="stores">
+      <a class="store-btn" href="https://apps.apple.com/app/id6741076205" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 12.04c-.03-3.02 2.47-4.47 2.58-4.54-1.41-2.06-3.6-2.34-4.38-2.37-1.86-.19-3.63 1.1-4.58 1.1-.95 0-2.4-1.07-3.95-1.04-2.03.03-3.91 1.18-4.95 3-2.11 3.66-.54 9.06 1.51 12.03 1.01 1.46 2.21 3.09 3.79 3.03 1.52-.06 2.1-.99 3.94-.99s2.36.99 3.97.96c1.64-.03 2.68-1.48 3.69-2.94 1.16-1.69 1.64-3.32 1.67-3.41-.04-.02-3.21-1.23-3.24-4.88zM14.13 3.66c.83-1.01 1.39-2.41 1.24-3.81-1.2.05-2.66.8-3.52 1.81-.77.89-1.45 2.32-1.27 3.69 1.34.1 2.71-.68 3.55-1.69z"/></svg>
+        App Store
+      </a>
+      <a class="store-btn" href="https://play.google.com/store/apps/details?id=studio.techno.songe" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.121 12l2.577-2.491zM5.864 2.658L16.802 8.99l-2.302 2.302L5.864 2.658z"/></svg>
+        Google Play
+      </a>
+    </div>
+
+    <p class="hint">Une fois l'app installée et ton compte créé, reviens toucher le lien d'invitation : il t'emmènera directement dans le club.</p>
+  </main>
+
+  <footer>
+    <a href="/">songe.techno.studio</a>
+  </footer>
+
+  <script>
+    // Les Universal Links ouvrent l'app avant cette page quand elle est
+    // installée : ce bouton est un repli manuel. Le code vient de l'URL, il
+    // n'est jamais injecté dans la page.
+    (function () {
+      const match = window.location.pathname.match(/^\/club\/([A-Za-z0-9]{6,32})$/);
+      const link = document.getElementById('open-app');
+      if (match) link.href = `songe://songe.com/club/${encodeURIComponent(match[1])}`;
+    })();
+  </script>
+</body>
+</html>

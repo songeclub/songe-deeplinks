@@ -10,7 +10,11 @@
           },
           {
             "/": "/pack/*",
-            "comment": "Starter pack share links"
+            "comment": "Playlist share links"
+          },
+          {
+            "/": "/club/*",
+            "comment": "Reading club invitation links"
           }
         ]
       }
