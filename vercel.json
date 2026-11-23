@@ -3,7 +3,8 @@
   "rewrites": [
     { "source": "/u/:username", "destination": "/u" },
     { "source": "/pack/:id", "destination": "/pack" },
-    { "source": "/club/:code", "destination": "/club" }
+    { "source": "/club/:code", "destination": "/club" },
+    { "source": "/a-lire/:id", "destination": "/a-lire" }
   ],
   "headers": [
     {

@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#5A7DFF" />
-  <title>Starter pack Songe</title>
+  <title>Playlist Songe</title>
   <meta name="description" content="Découvre cette sélection de livres sur Songe — l'app pour les amoureux de lecture." />
 
   <!-- Open Graph (statiques — pour des previews dynamiques par pack il faudra une edge function) -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Découvre ce starter pack sur Songe" />
+  <meta property="og:title" content="Découvre cette playlist sur Songe" />
   <meta property="og:description" content="Une sélection de livres à découvrir, à enregistrer et à partager." />
   <meta property="og:site_name" content="Songe" />
   <meta property="og:image" content="https://songe.techno.studio/og-image.jpg" />
@@ -19,7 +19,7 @@
   <meta property="og:image:height" content="1024" />
   <meta property="og:image:alt" content="Songe — l'app pour les amoureux de lecture" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Découvre ce starter pack sur Songe" />
+  <meta name="twitter:title" content="Découvre cette playlist sur Songe" />
   <meta name="twitter:description" content="Une sélection de livres à découvrir, à enregistrer et à partager." />
   <meta name="twitter:image" content="https://songe.techno.studio/og-image.jpg" />
 
@@ -363,14 +363,15 @@
   <template id="tpl-not-found">
     <div class="not-found">
       <div class="not-found-icon">🔍</div>
-      <h2>Starter pack introuvable</h2>
-      <p>Il a peut-être été supprimé ou rendu privé par son créateur.</p>
+      <h2>Playlist introuvable</h2>
+      <p>Elle a peut-être été supprimée ou rendue privée par son créateur.</p>
       <a class="cta-primary" href="/" style="text-decoration: none;">
         Découvrir Songe
       </a>
     </div>
   </template>
 
+  <script src="/open-app.js"></script>
   <script>
     // ----- Config -----
     const SUPABASE_URL = 'https://ikeagfxyatdpcdvdlcdk.supabase.co';
@@ -498,9 +499,12 @@
 
       // Les Universal Links ouvrent l'app avant cette page quand elle est installée :
       // ce bouton est un repli manuel.
+      const appPath = `pack/${encodeURIComponent(pack.id)}`;
       card.querySelector('#open-app').addEventListener('click', () => {
-        window.location.href = `songe://songe.com/starterPack?id=${encodeURIComponent(pack.id)}`;
+        window.SongeOpenApp.openApp(appPath);
       });
+      // Sur un téléphone : l'app sur cette playlist, sinon le store
+      window.SongeOpenApp.openAppOrStore(appPath);
     }
 
     function renderNotFound() {

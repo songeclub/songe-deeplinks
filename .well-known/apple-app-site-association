@@ -15,6 +15,10 @@
           {
             "/": "/club/*",
             "comment": "Reading club invitation links"
+          },
+          {
+            "/": "/a-lire/*",
+            "comment": "To-read list share links"
           }
         ]
       }
